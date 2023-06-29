@@ -21,3 +21,38 @@ export const getEjemplos = async (req, res) => {
         res.status(404).json({message: e.message})
     }
 }
+
+export const getRecords = async (req, res) => {
+    const { cuit, comuna, rubro, barrio } = req.body;
+
+    const query = {};
+
+    if (cuit) {
+        query.cuit = cuit;
+    }
+
+    if (comuna) {
+        query.comuna = comuna;
+    }
+
+    if (rubro) {
+        query.rubro = rubro;
+    }
+
+    if (barrio) {
+        query.barrio = barrio;
+    }
+
+    try {
+        const data = await Ejemplo.find(query);
+
+        if(data.length === 0) {
+            return res.status(404).json({message: "No hay registros"})
+        }
+        
+        return res.status(200).json(data)
+    }
+    catch(e) {
+        return res.status(404).json({message: e.message})
+    }   
+}

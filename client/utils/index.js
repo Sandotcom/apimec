@@ -7,3 +7,8 @@ export const getEjemplos = async () => {
   const { data } = await axios.get(`${URL}/ejemplo`);
   return data;
 }
+
+export const getRegistros = async (payload) => {
+  const { data } = await axios.post(`${URL}/ejemplo`, payload)
+  return data;
+}
